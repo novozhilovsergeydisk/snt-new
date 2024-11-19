@@ -11,6 +11,10 @@
 |
 */
 
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
 Route::get('/', function () {
     return view('main', ["message"=>"main"]);
 });
@@ -27,6 +31,15 @@ Route::get('/login', function () {
     return view('login', ["message"=>"login"]);
 });
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::post('/login', function (Illuminate\Http\Request $request) {
+    $email = $request->input('email'); // Извлечение email
+    $password = $request->input('password'); // Извлечение password
+
+    // Проверка данных
+    if ($email === 'admin@example.com' && $password === 'password') {
+        return response()->json(['message' => 'Login successful!']);
+    } else {
+        return response()->json(['message' => 'Invalid credentials!'], 401);
+    }
+});
+

@@ -3,19 +3,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="SydtneLCPWzHzbEHZiBLAs94QPJSDaH0q1PnQ92V">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>login</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
 
-    <link href="/css/build/1e.css" rel="stylesheet" />
+    <link href="/css/build/1e.css" rel="stylesheet"/>
 
     <!-- Scripts -->
 
-    <script type="module" src="/js/build/1O.js"></script>
+    <script src="/js/build/sy.js"></script>
+
 
 </head>
 <body class="font-sans text-gray-900 antialiased">
@@ -29,17 +30,19 @@
     </div>
 
     <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-        <p>Joker</p>
+        <p class="mt-4 mb-2 sh gi text-white">Личный кабинет на реконструкции!</p>
         <!-- Session Status -->
 
-        <form method="POST" action="http://127.0.0.1:8002/login">
-            <input type="hidden" name="_token" value="SydtneLCPWzHzbEHZiBLAs94QPJSDaH0q1PnQ92V" autocomplete="off">
+        <form>
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete="off">
             <!-- Email Address -->
             <div>
                 <label class="block font-medium text-sm text-gray-700 dark:text-gray-300" for="email">
                     Email
                 </label>
-                <input  class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full" id="email" type="email" name="email" required="required" autofocus="autofocus" autocomplete="username">
+                <input class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full"
+                       id="email" type="email" name="email" required="required" autofocus="autofocus"
+                       autocomplete="username">
             </div>
 
             <!-- Password -->
@@ -48,7 +51,9 @@
                     Пароль
                 </label>
 
-                <input  class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full" id="password" type="password" name="password" required="required" autocomplete="current-password">
+                <input class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full"
+                       id="password" type="password" name="password" required="required"
+                       autocomplete="current-password">
 
             </div>
 
@@ -75,12 +80,59 @@
                     Забыли пароль?
                 </a>
 
-                <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-3">
+                <button id="login" type="button"
+                        class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-3">
                     Вход
                 </button>
             </div>
         </form>
     </div>
 </div>
+
+<script src="/js/utils.js"></script>
+
+<script>
+    const login = async () => {
+        const url = '/login'; // Укажите путь маршрута
+        const data = {
+            email: 'admin@example.com', // Должен совпадать с вашим условием в Laravel
+            password: 'password'       // Должен совпадать с вашим условием в Laravel
+        };
+
+        const formBody = Object.keys(data)
+            .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+            .join('&');
+
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: formBody
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log('Успешный вход:', result.message);
+            } else {
+                const error = await response.json();
+                console.error('Ошибка входа:', error.message);
+            }
+        } catch (error) {
+            console.error('Произошла ошибка запроса:', error);
+        }
+    };
+
+    login();
+
+
+
+</script>
+
 </body>
 </html>

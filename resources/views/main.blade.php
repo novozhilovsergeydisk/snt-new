@@ -14,7 +14,7 @@
 
     <!-- Scripts -->
 
-    <script type="module" src="/js/build/1O.js"></script>
+    <script type="module" src="/js/build/sy.js"></script>
 
     <script type="module" src="/js/build/pz.js"></script>
 

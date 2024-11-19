@@ -12,5 +12,21 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('main', ["message"=>"main"]);
 });
+
+Route::get('/contacts', function () {
+    return view('contacts', ["message"=>"contacts"]);
+});
+
+Route::get('/billboard', function () {
+    return view('billboard', ["message"=>"billboard"]);
+});
+
+Route::get('/login', function () {
+    return view('login', ["message"=>"login"]);
+});
+
+//Route::get('/', function () {
+//    return view('welcome');
+//});

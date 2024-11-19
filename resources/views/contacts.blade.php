@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html id="html" lang="ru" class="a">
 <head>

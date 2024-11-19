@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -6,14 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="SydtneLCPWzHzbEHZiBLAs94QPJSDaH0q1PnQ92V">
 
-    <title>snt-breeze</title>
+    <title>login</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+    <link href="/css/build/1e.css" rel="stylesheet" />
+
     <!-- Scripts -->
-    <link rel="preload" as="style" href="http://127.0.0.1:8002/build/assets/app-CT_jLX1e.css" /><link rel="modulepreload" href="http://127.0.0.1:8002/build/assets/app-Cs0QkU1O.js" /><link rel="stylesheet" href="http://127.0.0.1:8002/build/assets/app-CT_jLX1e.css" /><script type="module" src="http://127.0.0.1:8002/build/assets/app-Cs0QkU1O.js"></script>    </head>
+
+    <script type="module" src="/js/build/1O.js"></script>
+
+</head>
 <body class="font-sans text-gray-900 antialiased">
 <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
     <div>

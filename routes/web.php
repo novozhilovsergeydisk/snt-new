@@ -11,6 +11,18 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FooController;
+
+// Отображение формы
+Route::get('/foo', [FooController::class, 'showForm'])->name('foo.form');
+
+Route::post('/foo', 'FooController@handlePost');
+
+
+// Обработка POST-запроса
+// Route::post('/foo', 'FooController@method');
+
 //Route::get('/', function () {
 //    return view('welcome');
 //});
@@ -30,6 +42,8 @@ Route::get('/billboard', function () {
 Route::get('/login', function () {
     return view('login', ["message"=>"login"]);
 });
+
+
 
 Route::post('/login', function (Illuminate\Http\Request $request) {
     $email = $request->input('email'); // Извлечение email

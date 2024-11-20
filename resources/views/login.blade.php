@@ -128,9 +128,9 @@
         }
     };
 
-    login();
+    const btnLogin = document.getElementById('login');
 
-
+    btnLogin.addEventListener('click', login);
 
 </script>
 

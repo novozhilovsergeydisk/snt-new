@@ -42,7 +42,7 @@ class LoginPostController extends Controller
         // Проверка пароля
         if (empty($data['password'])) {
             $errors['password'][] = 'The password field is required.';
-        } elseif (strlen($data['password']) < 8) {
+        } elseif (strlen($data['password']) < 6) {
             $errors['password'][] = 'The password must be at least 8 characters.';
         } elseif (strlen($data['password']) > 100) {
             $errors['password'][] = 'The password may not be greater than 100 characters.';

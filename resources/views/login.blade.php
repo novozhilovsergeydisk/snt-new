@@ -96,9 +96,9 @@
 <script src="/js/utils.js"></script>
 
 <script>
-  // JavaScript код для обработки отправки формы
-  const loginButton = document.getElementById('login');
-  const errorMessages = document.getElementById('error-messages');
+// JavaScript код для обработки отправки формы
+const loginButton = document.getElementById('login');
+const errorMessages = document.getElementById('error-messages');
 
 loginButton.addEventListener('click', function () {
     const url = '/login';
@@ -107,12 +107,12 @@ loginButton.addEventListener('click', function () {
 
     // Проверяем валидность данных перед отправкой
     if (!email) {
-        errorMessages.innerHTML = '<p>Заполните поле Email.</p>';
+        errorMessages.innerHTML = '<p>The email field is required.</p>';
         return; // Останавливаем выполнение функции
     }
 
     if (!password || password.length < 8) {
-        errorMessages.innerHTML = '<p>Пароль должен содержать не менее 6 символов.</p>';
+        errorMessages.innerHTML = '<p>The password must be at least 8 characters.</p>';
         return; // Останавливаем выполнение функции
     }
 
@@ -145,13 +145,6 @@ loginButton.addEventListener('click', function () {
             }
             throw new Error(`HTTP error! Status: ${response.status}. Response: ${JSON.stringify(errorData)}`);
         }
-<<<<<<< HEAD
-    };
-
-    const btnLogin = document.getElementById('login');
-
-    btnLogin.addEventListener('click', login);
-=======
         return response.json();
     })
     .then(data => {
@@ -160,7 +153,6 @@ loginButton.addEventListener('click', function () {
     .catch(error => {
         console.error('Fetch error:', error);
     });
->>>>>>> 744b7a3 (Change files)
 
 });
 </script>

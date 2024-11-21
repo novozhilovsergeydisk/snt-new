@@ -76,6 +76,7 @@
 
             <div>
                 <p id="error-messages" class="mt-4 mb-2 sh gi cl-red"></p>
+                <p id="success-messages" class="mt-4 mb-2 sh gi cl-green"></p>
             </div>
 
             <div class="flex items-center justify-end mt-4">
@@ -107,12 +108,12 @@ loginButton.addEventListener('click', function () {
 
     // Проверяем валидность данных перед отправкой
     if (!email) {
-        errorMessages.innerHTML = '<p>The email field is required.</p>';
+        errorMessages.innerHTML = '<p>Поле электронной почты обязательно.</p>';
         return; // Останавливаем выполнение функции
     }
 
     if (!password || password.length < 8) {
-        errorMessages.innerHTML = '<p>The password must be at least 8 characters.</p>';
+        errorMessages.innerHTML = '<p>Пароль должен содержать не менее 6 символов.</p>';
         return; // Останавливаем выполнение функции
     }
 

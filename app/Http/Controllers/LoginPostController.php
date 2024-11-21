@@ -14,6 +14,7 @@ class LoginPostController extends Controller
         // Если валидация не прошла, возвращаем JSON с ошибками
         if ($validationResult['status'] === 'error') {
             return response()->json([
+                'status' => 'failed',
                 'message' => 'Validation failed',
                 'errors' => $validationResult['errors'],
             ], 422); // HTTP статус 422 Unprocessable Entity
@@ -21,6 +22,7 @@ class LoginPostController extends Controller
 
         // Возвращаем успешный ответ
         return response()->json([
+            'status' => 'success',
             'message' => 'Login successful!',
             'data' => $validationResult['data'],
         ]);

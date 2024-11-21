@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 class FooController extends Controller
 {
+<<<<<<< HEAD
     /**
      * Отображение формы.
      */
@@ -27,3 +28,10 @@ class FooController extends Controller
     }
 }
 
+=======
+    public function index()
+    {
+        return view('foo');
+    }
+}
+>>>>>>> 744b7a3 (Change files)

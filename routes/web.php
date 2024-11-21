@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,18 +12,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FooController;
-
-// Отображение формы
-Route::get('/foo', [FooController::class, 'showForm'])->name('foo.form');
-
-Route::post('/foo', 'FooController@handlePost');
-
-
-// Обработка POST-запроса
-// Route::post('/foo', 'FooController@method');
 
 //Route::get('/', function () {
 //    return view('welcome');
@@ -43,17 +33,10 @@ Route::get('/login', function () {
     return view('login', ["message"=>"login"]);
 });
 
+Route::post('/login', 'LoginPostController@store');
 
+Route::get('/foo', 'FooController@index');
 
-Route::post('/login', function (Illuminate\Http\Request $request) {
-    $email = $request->input('email'); // Извлечение email
-    $password = $request->input('password'); // Извлечение password
+Route::post('/foo', 'FooPostController@store');
 
-    // Проверка данных
-    if ($email === 'admin@example.com' && $password === 'password') {
-        return response()->json(['message' => 'Login successful!']);
-    } else {
-        return response()->json(['message' => 'Invalid credentials!'], 401);
-    }
-});
 

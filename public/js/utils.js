@@ -60,3 +60,39 @@ function clickHandler(target, handler) {
         console.error('Invalid target or handler. Please provide a DOM element or a function.');
     }
 }
+
+const login = async () => {
+    const url = '/login';
+    const data = {
+        email: 'admin@example.com',
+        password: 'password'
+    };
+
+    const formBody = Object.keys(data)
+        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+        .join('&');
+
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': csrfToken
+            },
+            body: formBody
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log('Успешный вход:', result.message);
+        } else {
+            const error = await response.json();
+            console.error('Ошибка входа:', error.message);
+        }
+    } catch (error) {
+        console.error('Произошла ошибка запроса:', error);
+    }
+};

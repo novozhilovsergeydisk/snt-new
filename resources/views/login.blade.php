@@ -33,16 +33,16 @@
         <p class="mt-4 mb-2 sh gi cl-yellow">Личный кабинет на реконструкции!</p>
         <!-- Session Status -->
 
-        <form>
+        <form action="/login" method="POST">
             <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete="off">
             <!-- Email Address -->
             <div>
                 <label class="block font-medium text-sm text-gray-700 dark:text-gray-300" for="email">
-                    Email
+                    № участка
                 </label>
                 <input class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full"
-                       id="email" type="email" name="email" required="required" autofocus="autofocus"
-                       autocomplete="username">
+                       id="email" type="text" name="email" required_="required" autofocus="autofocus"
+                       autocomplete_="username">
             </div>
 
             <!-- Password -->
@@ -85,7 +85,7 @@
                     Забыли пароль?
                 </a>-->
 
-                <button id="login" type="button"
+                <button id="login" type="submit"
                         class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-3">
                     Вход
                 </button>
@@ -100,62 +100,67 @@
 // JavaScript код для обработки отправки формы
 const loginButton = document.getElementById('login');
 const errorMessages = document.getElementById('error-messages');
+const successMessages = document.getElementById('success-messages');
 
-loginButton.addEventListener('click', function () {
-    const url = '/login';
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+// loginButton.addEventListener('click', function () {
+//     const url = '/login';
+//     const email = document.getElementById('email').value;
+//     const password = document.getElementById('password').value;
 
-    // Проверяем валидность данных перед отправкой
-    if (!email) {
-        errorMessages.innerHTML = '<p>Поле электронной почты обязательно.</p>';
-        return; // Останавливаем выполнение функции
-    }
+//     // Проверяем валидность данных перед отправкой
+//     if (!email) {
+//         errorMessages.innerHTML = '<p>Поле электронной почты обязательно.</p>';
+//         return; // Останавливаем выполнение функции
+//     }
 
-    if (!password || password.length < 8) {
-        errorMessages.innerHTML = '<p>Пароль должен содержать не менее 6 символов.</p>';
-        return; // Останавливаем выполнение функции
-    }
+//     if (!password || password.length < 8) {
+//         errorMessages.innerHTML = '<p>Пароль должен содержать не менее 6 символов.</p>';
+//         return; // Останавливаем выполнение функции
+//     }
 
-    const data = new URLSearchParams({
-        email: email,
-        password: password // Передаем введенные значения
-    });
+//     const data = new URLSearchParams({
+//         email: email,
+//         password: password // Передаем введенные значения
+//     });
 
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+//     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'X-CSRF-TOKEN': csrfToken,
-        },
-        body: data.toString()
-    })
-    .then(async response => {
-        errorMessages.innerHTML = ''; // Очищаем предыдущие ошибки
-        if (!response.ok) {
-            const errorData = await response.json(); // Получаем JSON с ошибками
-            if (response.status === 422) {
-                // Обрабатываем ошибки валидации
-                for (const [field, messages] of Object.entries(errorData.errors)) {
-                    messages.forEach(msg => {
-                        errorMessages.innerHTML += `<p>${msg}</p>`;
-                    });
-                }
-            }
-            throw new Error(`HTTP error! Status: ${response.status}. Response: ${JSON.stringify(errorData)}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Response:', data);
-    })
-    .catch(error => {
-        console.error('Fetch error:', error);
-    });
+//     fetch(url, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/x-www-form-urlencoded',
+//             'X-CSRF-TOKEN': csrfToken,
+//         },
+//         body: data.toString()
+//     })
+//     .then(async response => {
+//         errorMessages.innerHTML = ''; // Очищаем предыдущие ошибки
+//         if (!response.ok) {
+//             const errorData = await response.json(); // Получаем JSON с ошибками
+//             if (response.status === 422) {
+//                 // Обрабатываем ошибки валидации
+//                 for (const [field, messages] of Object.entries(errorData.errors)) {
+//                     messages.forEach(msg => {
+//                         errorMessages.innerHTML += `<p>${msg}</p>`;
+//                     });
+//                 }
+//             }
+//             throw new Error(`HTTP error! Status: ${response.status}. Response: ${JSON.stringify(errorData)}`);
+//         }
+//         return response.json();
+//     })
+//     .then(data => {
+//         if (data.status === 'success') {
+//             successMessages.innerHTML = data.message;
+//         }
+//         console.log(data.status);
+//         console.log('Response:', data);
+//     })
+//     .catch(error => {
+//         console.error('Fetch error:', error);
+//     });
 
-});
+// });
 </script>
 
 </body>

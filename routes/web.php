@@ -39,4 +39,6 @@ Route::get('/foo', 'FooController@index');
 
 Route::post('/foo', 'FooPostController@store');
 
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
 

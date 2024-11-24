@@ -59,7 +59,7 @@ foreach($_users_ as $user) {
     // dump($id);
     $parts = explode('@', $email);
     $string = $parts[0] ?? null;
-    $new_password = HASH::make($string);
+    $new_password = Hash::make($string);
     dump($new_password);
     $res = DB::update('UPDATE _users_ SET password = ? WHERE id = ?', [$new_password, $id]);
     // dump($res);

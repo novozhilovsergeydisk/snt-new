@@ -29,9 +29,16 @@ Route::get('/billboard', function () {
     return view('billboard', ["message"=>"billboard"]);
 });
 
-Route::get('/login', function () {
-    return view('login', ["message"=>"login"]);
+Route::get('/login', 'LoginController@index')->name('login');
+
+Route::get('/logout', function () {
+    return view('main', ["message"=>"main"]);
 });
+
+//Route::get('/login', function () {
+////    dd('login');
+//    return view('login', ["message"=>"login"]);
+//});
 
 Route::post('/login', 'LoginPostController@store');
 

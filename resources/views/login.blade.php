@@ -16,10 +16,13 @@
     <!-- Scripts -->
 
     <script src="/js/build/sy.js"></script>
-
-
 </head>
 <body class="font-sans text-gray-900 antialiased">
+<style>
+    .cl-red {
+        color: red;
+    }
+</style>
 <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
     <div>
         <a href="/">
@@ -31,7 +34,20 @@
 
     <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
         <p class="mt-4 mb-2 sh gi cl-yellow">Личный кабинет на реконструкции!</p>
-        <!-- Session Status -->
+
+        @if (session('error'))
+            <p class="alert alert-danger cl-red">
+                {{ session('error') }}
+            </p>
+        @endif
+
+        @if (isset($error))
+            <p class="alert alert-danger cl-red">
+                {{ $error }}
+            </p>
+    @endif
+
+    <!-- Session Status -->
 
         <form action="/login" method="POST">
             <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete="off">

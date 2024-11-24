@@ -37,12 +37,12 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete="off">
             <!-- Email Address -->
             <div>
-                <label class="block font-medium text-sm text-gray-700 dark:text-gray-300" for="email">
+                <label class="block font-medium text-sm text-gray-700 dark:text-gray-300" for="plot">
                     № участка
                 </label>
                 <input class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full"
-                       id="email" type="text" name="email" required_="required" autofocus="autofocus"
-                       autocomplete_="username">
+                       id="plot" type="text" name="plot" required_="required" autofocus="autofocus"
+                       autocomplete_="off">
             </div>
 
             <!-- Password -->

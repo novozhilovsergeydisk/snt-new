@@ -6,27 +6,79 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Support\Facades\HASH;
+
 class LoginPostController extends Controller
 {
     public function store(Request $request)
     {
+        $data = $request->all();
+
+// dd($data);
+
         // Выполняем валидацию вручную
-        $validationResult = $this->validateInput($request->all());
+        $validationResult = $this->validateInput($data);
 
-        // Получаем email из запроса
-        $email = $request->input('email');
-        $password = $request->input('password');
+        
+// dd($validationResult['data']['plot']);
 
-        dump($validationResult['status']);
-        dump('$2y$10$nmb9oRQ3p5meyCcA9Ne4n.nixM7LYCifUXAbNBmF9WoCWYLnJiEZG');
+        // Получаем plot из запроса
+        $plot = $validationResult['data']['plot']; // $request->input('plot');
+        $password = $validationResult['data']['password']; // $request->input('password');
 
-// Проверяем, существует ли пользователь с таким email
-$user = DB::table('users')->where('id', 1)->first();
-// $user = DB::table('users')->where('email', $email)->first();
+        // dump($validationResult);
+        // dump('$2y$10$nmb9oRQ3p5meyCcA9Ne4n.nixM7LYCifUXAbNBmF9WoCWYLnJiEZG');
 
-        dump($user);
+        // Проверяем, существует ли пользователь с таким номером участка
 
-        dd(bcrypt('proxima'));
+        // $users = DB::select('SELECT * FROM _users_ WHERE id = ?', [$plot]);
+
+        $_users_ = DB::select('SELECT * FROM _users_');
+
+        // dd($_users_);
+
+        
+
+        // dd($email);
+
+        // Разбиваем строку по символу '@'
+        // $parts = explode('@', $email);
+
+        // $string = $parts[0] ?? null;
+
+        // dump($string);
+
+        // $new_password = HASH::make($string);
+
+        // $res = DB::update('UPDATE _users_ SET password = ? WHERE id = ?', [$new_password, 151]); // $2y$10$U4ctfqnO7mQWGMff4D8nF.QL9MtwF21x01fD9IKDHvuGMZSD8kmg6
+
+foreach($_users_ as $user) {
+    // dump($user);
+    $id = $user->id;
+    $email = $user->email;
+    // dump($id);
+    $parts = explode('@', $email);
+    $string = $parts[0] ?? null;
+    $new_password = HASH::make($string);
+    dump($new_password);
+    $res = DB::update('UPDATE _users_ SET password = ? WHERE id = ?', [$new_password, $id]);
+    // dump($res);
+}
+
+        // dump($res);
+
+        // dump($new_password);
+
+        // $check = HASH::check($string, $new_password);
+        
+        // dump($check);
+
+        // $user = DB::table('_users_')->where('password', $new_password)->first();
+
+        // dump($user);
+
+        dd('END');
+
         // dd($validationResult);
         // Если валидация не прошла, возвращаем JSON с ошибками
         if ($validationResult['status'] === 'error') {
@@ -72,28 +124,21 @@ $user = DB::table('users')->where('id', 1)->first();
         $errors = [];
 
         // Проверка Участка
-        if (empty($data['email'])) {
-            $errors['email'][] = 'Заполните поле участок';
-        }  elseif (strlen($data['email']) > 255) {
-            $errors['email'][] = 'The email may not be greater than 255 characters.';
+        if (empty($data['plot'])) {
+            $errors['plot'][] = 'Заполните поле участок';
+        } elseif (!is_numeric($data['plot']) || intval($data['plot']) != $data['plot'] || $data['plot'] < 0) {
+            $errors['plot'][] = 'Участок должен быть целым неотрицательным числом.';
+        } elseif (!is_numeric($data['plot']) || intval($data['plot']) != $data['plot'] || $data['plot'] > 255) {
+            $errors['plot'][] = 'Участок не должен быть выше знчения 255.';
         }
-        
-        // // Проверка email
-        // if (empty($data['email'])) {
-        //     $errors['email'][] = 'The email field is required.';
-        // } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-        //     $errors['email'][] = 'The email must be a valid email address.';
-        // } elseif (strlen($data['email']) > 255) {
-        //     $errors['email'][] = 'The email may not be greater than 255 characters.';
-        // }
 
         // Проверка пароля
         if (empty($data['password'])) {
-            $errors['password'][] = 'The password field is required.';
+            $errors['password'][] = 'Поле ввода для пароля обязательно к заполнению.';
         } elseif (strlen($data['password']) < 6) {
-            $errors['password'][] = 'The password must be at least 8 characters.';
+            $errors['password'][] = 'Пароль должен содержать не менее 6 символов.';
         } elseif (strlen($data['password']) > 100) {
-            $errors['password'][] = 'The password may not be greater than 100 characters.';
+            $errors['password'][] = 'Пароль должен содержать не более 100 символов.';
         }
 
         // Если есть ошибки, возвращаем их

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 
-use Illuminate\Support\Facades\HASH;
+use Illuminate\Support\Facades\Hash;
 
 class LoginPostController extends Controller
 {

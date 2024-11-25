@@ -93,21 +93,7 @@ class LoginPostController extends Controller
 //            // dump($res);
 //        }
 
-        // dump($res);
-
-        // dump($new_password);
-
-        // $check = HASH::check($string, $new_password);
-
-        // dump($check);
-
         // $user = DB::table('_users_')->where('password', $new_password)->first();
-
-        // dump($user);
-
-//        dd('END');
-
-        // dd($validationResult);
 
         // Возвращаем успешный ответ
         return response()->json([

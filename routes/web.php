@@ -4,7 +4,13 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
-Route::delete('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+// Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+// Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+});
 
 //Route::get('/', function () {
 //    return view('welcome');

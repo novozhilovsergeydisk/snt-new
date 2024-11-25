@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Hash;
 
+use Illuminate\Support\Str;
+
 class LoginPostController extends Controller
 {
     public function store(Request $request)
@@ -45,9 +47,18 @@ class LoginPostController extends Controller
             //$id = $_user_->id;
 
             if ($check) {
-                return redirect()->route('dashboard')->with('success', 'Welcome back!');
+                // Генерация токена
+                $token = Str::random(60);
+                
+                // Сохранение токена в сессии
+                session(['token' => $token]);
+                
+                // Установка куки с токеном на 5 минут
+                return redirect()->route('dashboard')
+                    ->with('success', 'Добро пожаловать!')
+                    ->cookie('auth_token', $token, 5); // Устанавливаем куку на 5 минут
             } else {
-                return view('login')->with('error', 'Неверный пароль');;
+                return view('login')->with('error', 'Неверный пароль');
             }
         }
 

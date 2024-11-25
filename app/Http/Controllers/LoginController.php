@@ -8,6 +8,6 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('login'); // Возвращаем представление dashboard
+        return view('login'); // Возвращаем представление login
     }
 }

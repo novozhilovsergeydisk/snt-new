@@ -1,17 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::delete('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 //Route::get('/', function () {
 //    return view('welcome');
@@ -20,6 +13,12 @@ use App\Http\Controllers\AuthController;
 Route::get('/', function () {
     return view('main', ["message"=>"main"]);
 });
+
+// Другие маршруты...
+
+// Route::get('/protected', 'AuthController@someProtectedMethod')->name('protected');
+
+Route::get('/protected', [AuthController::class, 'someProtectedMethod'])->name('protected');
 
 Route::get('/contacts', function () {
     return view('contacts', ["message"=>"contacts"]);

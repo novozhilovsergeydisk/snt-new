@@ -3,26 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-    <title>Foo Form</title>
-</head>
-<body>
-    <h1>Форма данных</h1>
-
-    @if(isset($response))
-        <p><strong>Результат:</strong> {{ $response }}</p>
-    @endif
-
-    <form method="POST" action="{{ route('foo.post') }}">
-        @csrf
-        <label for="data">Введите данные:</label>
-        <input type="text" id="data" name="data">
-        <button type="submit">Отправить</button>
-    </form>
-</body>
-</html>
-
-=======
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Foo View</title>
 </head>
@@ -98,4 +78,3 @@ testBtn.addEventListener('click', function () {
 
 </body>
 </html>
->>>>>>> 744b7a3 (Change files)

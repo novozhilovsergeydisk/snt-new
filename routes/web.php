@@ -1,16 +1,19 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\AuthSessionController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
+// use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
-// Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+// Route::post('/logout', [AuthenticatedSessionController::class, '_destroy'])->name('logout');
 
-// Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+Route::post('/logout', 'AuthenticatedSessionController@_destroy')->name('logout');
 
-Route::middleware(['auth'])->group(function () {
-    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-});
+// Route::post('/logout', 'AuthenticatedController@_destroy')->name('logout');
+
+// Route::middleware(['auth'])->group(function () {
+//     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+// });
 
 //Route::get('/', function () {
 //    return view('welcome');

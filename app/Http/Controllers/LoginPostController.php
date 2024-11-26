@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 
 class LoginPostController extends Controller
 {
-    public function store(Request $request)
+    public function auth(Request $request)
     {
         $data = $request->all();
 
@@ -38,11 +38,11 @@ class LoginPostController extends Controller
             // Получаем plot из запроса
             $plot = $validationResult['data']['plot']; // $request->input('plot');
             $password = $validationResult['data']['password']; // $request->input('password');
-            $_users_ = DB::select('SELECT * FROM _users_ WHERE id = ?', [$plot]);
-            $hash = $_users_[0]->password;
+            $_users_ = DB::select('SELECT * FROM _users_ WHERE id = ?', [$plot])[0];
+            $hash = $_users_->password;
             $check = Hash::check($password, $hash);
 
-//            dd($check);
+            // dd($_users_);
 
             //$id = $_user_->id;
 
@@ -52,59 +52,24 @@ class LoginPostController extends Controller
                 
                 // Сохранение токена в сессии
                 session(['token' => $token]);
+
+                $user = DB::select('SELECT * FROM clients WHERE plot = ?', [$plot])[0];
+                $last_name = $user->last_name;
+                $first_name = $user->first_name;
+                $middle_name = $user->middle_name;
+                $electro_counter = $user->electro_counter;
+
+                // dd($user);                     ->with('first_name', $first_name)
                 
                 // Установка куки с токеном на 5 минут
-                return redirect()->route('dashboard')
-                    ->with('success', 'Добро пожаловать!')
+                return redirect()
+                    ->route('dashboard')
+                    ->with('last_name', $last_name)
                     ->cookie('auth_token', $token, 5); // Устанавливаем куку на 5 минут
             } else {
                 return view('login')->with('error', 'Неверный пароль');
             }
         }
-
-// dd($validationResult['data']['plot']);
-
-//        dd('test');
-
-        // dump($validationResult);
-        // dump('$2y$10$nmb9oRQ3p5meyCcA9Ne4n.nixM7LYCifUXAbNBmF9WoCWYLnJiEZG');
-
-        // Проверяем, существует ли пользователь с таким номером участка
-
-        // $users = DB::select('SELECT * FROM _users_ WHERE id = ?', [$plot]);
-
-
-
-        // dd($_users_);
-
-
-        // dd($email);
-
-        // Разбиваем строку по символу '@'
-        // $parts = explode('@', $email);
-
-        // $string = $parts[0] ?? null;
-
-        // dump($string);
-
-        // $new_password = HASH::make($string);
-
-        // $res = DB::update('UPDATE _users_ SET password = ? WHERE id = ?', [$new_password, 151]); // $2y$10$U4ctfqnO7mQWGMff4D8nF.QL9MtwF21x01fD9IKDHvuGMZSD8kmg6
-
-//        foreach ($_users_ as $user) {
-//            // dump($user);
-//            $id = $user->id;
-//            $email = $user->email;
-//            // dump($id);
-//            $parts = explode('@', $email);
-//            $string = $parts[0] ?? null;
-//            $new_password = Hash::make($string);
-//            // dump($new_password);
-//            // $res = DB::update('UPDATE _users_ SET password = ? WHERE id = ?', [$new_password, $id]);
-//            // dump($res);
-//        }
-
-        // $user = DB::table('_users_')->where('password', $new_password)->first();
 
         // Возвращаем успешный ответ
         return response()->json([
@@ -112,11 +77,6 @@ class LoginPostController extends Controller
             'message' => 'Login successful!',
             'data' => $validationResult['data'],
         ]);
-    }
-
-    private function show_bcrypt()
-    {
-        return bcrypt('joker_579');
     }
 
     public function handleLogin(Request $request)

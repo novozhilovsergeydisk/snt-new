@@ -48,7 +48,7 @@ Route::get('/logout', function () {
 //    return view('login', ["message"=>"login"]);
 //});
 
-Route::post('/login', 'LoginPostController@store');
+Route::post('/login', 'LoginPostController@auth');
 
 Route::get('/foo', 'FooController@index');
 

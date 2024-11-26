@@ -45,7 +45,7 @@
             <p class="alert alert-danger cl-red">
                 {{ $error }}
             </p>
-    @endif
+        @endif
 
     <!-- Session Status -->
 

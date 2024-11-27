@@ -54,6 +54,7 @@ class LoginPostController extends Controller
                 session(['token' => $token]);
 
                 $user = DB::select('SELECT * FROM clients WHERE plot = ?', [$plot])[0];
+                $user_id = $user->user_id;
                 $last_name = $user->last_name;
                 $first_name = $user->first_name;
                 $middle_name = $user->middle_name;
@@ -61,13 +62,16 @@ class LoginPostController extends Controller
 
                 $balance_list = DB::select('SELECT * FROM turnover_balance_sheet WHERE plot = ?', [$plot]);
 
+                $electro_list = DB::select('SELECT * FROM electro_counter_list WHERE user_id = ?', [$user_id])[0];
+
+                // dd($electro_list);
+
                 session(['last_name' => $last_name]);
                 session(['first_name' => $first_name]);
                 session(['balance_list' => $balance_list]);
+                session(['electro_list' => $electro_list]);
 
-                foreach($balance_list as $balance) {
-                    // dump($balance);
-                }
+                // dd(session()->get('electro_list'));
 
                 // dd($balance_list);
                 

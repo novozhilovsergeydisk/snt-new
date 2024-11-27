@@ -155,9 +155,9 @@
                             <tbody>
                                 @foreach (session('electro_list') as $electro)
                                     <tr class="hover:bg-gray-100">
-                                        <td class="border border-gray-300 px-4 py-2 text-gray-700">{{ $electro->m }}</td>
-                                        <td class="border border-gray-300 px-4 py-2 text-gray-700">{{ $electro->l }}</td>
-                                        <td class="border border-gray-300 px-4 py-2 text-gray-700">{{ $electro->summ }}</td>
+                                        <td class="border border-gray-300 px-4 py-2 text-gray-700"></td>
+                                        <td class="border border-gray-300 px-4 py-2 text-gray-700"></td>
+                                        <td class="border border-gray-300 px-4 py-2 text-gray-700"></td>
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -64,7 +64,7 @@
                               <!-- Authentication -->
                               <form method="POST" action="/logout">
                                  {{ csrf_field() }}
-                                 <button type="submit" class="pl-1 c-white">Выйти</button>
+                                 <button type="submit" class="ml-5 text-white sm-text">Выйти</button>
                               </form>
                               <!-- <form method="POST" action="/logout">
                                  <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete="off">
@@ -105,10 +105,11 @@
                      </a>
                      <!-- Authentication -->
                      <form method="POST" action="/logout">
-                        <input type="hidden" name="_token" value="tRIbDK8PA45LJIKpEdAxcFA7YIYPBHPtxpB7g6YG" autocomplete="off">
+                       {{ csrf_field() }}
+                        <!-- <input type="hidden" name="_token" value="" autocomplete="off"> -->
                         <a class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 focus:outline-none focus:text-gray-800 dark:focus:text-gray-200 focus:bg-gray-50 dark:focus:bg-gray-700 focus:border-gray-300 dark:focus:border-gray-600 transition duration-150 ease-in-out" href="/logout" onclick="event.preventDefault();
                            this.closest('form').submit();">
-                        Выход
+                        Выход@
                         </a>
                      </form>
                   </div>
@@ -150,16 +151,13 @@
                                     <th class="border border-gray-300 px-4 py-2 text-left text-gray-700">Т1 день</th>
                                     <th class="border border-gray-300 px-4 py-2 text-left text-gray-700">Т2 ночь</th>
                                     <th class="border border-gray-300 px-4 py-2 text-left text-gray-700">Сумма (Общий тариф)</th>
-                                </tr>
-                            </thead>
+                                </tr>                            </thead>
                             <tbody>
-                                @foreach (session('electro_list') as $electro)
-                                    <tr class="hover:bg-gray-100">
-                                        <td class="border border-gray-300 px-4 py-2 text-gray-700"></td>
-                                        <td class="border border-gray-300 px-4 py-2 text-gray-700"></td>
-                                        <td class="border border-gray-300 px-4 py-2 text-gray-700"></td>
-                                    </tr>
-                                @endforeach
+                                 <tr class="hover:bg-gray-100">
+                                       <td class="border border-gray-300 px-4 py-2 text-gray-700">@if(session('m')){{ session('m') }}@endif</td>
+                                       <td class="border border-gray-300 px-4 py-2 text-gray-700">@if(session('l')){{ session('l') }}@endif</td>
+                                       <td class="border border-gray-300 px-4 py-2 text-gray-700">@if(session('summ')){{ session('summ') }}@endif</td>
+                                 </tr>
                             </tbody>
                         </table>
                         @endif

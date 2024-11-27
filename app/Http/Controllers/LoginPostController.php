@@ -64,16 +64,22 @@ class LoginPostController extends Controller
 
                 $balance_list = DB::select('SELECT * FROM turnover_balance_sheet WHERE plot = ?', [$plot]);
 
-                $electro_list = DB::select('SELECT * FROM electro_counter_list WHERE user_id = ?', [$user_id]);
+                $electro_list = DB::select('SELECT * FROM electro_counter_list WHERE user_id = ?', [$user_id])[0];
+                $m = $electro_list->M;
+                $l = $electro_list->L;
+                $summ = $electro_list->summ;
 
                 // dump($balance_list);
 
-                // dd($electro_list);
+                // dd($summ);
 
                 session(['last_name' => $last_name]);
                 session(['first_name' => $first_name]);
                 session(['balance_list' => $balance_list]);
                 session(['electro_list' => $electro_list]);
+                session(['m' => $m]);
+                session(['l' => $l]);
+                session(['summ' => $summ]);
 
                 // dump(session()->get('electro_list'));
 

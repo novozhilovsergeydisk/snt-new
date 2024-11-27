@@ -71,9 +71,9 @@ class LoginPostController extends Controller
                 session(['balance_list' => $balance_list]);
                 session(['electro_list' => $electro_list]);
 
-                // dd(session()->get('electro_list'));
+                dump(session()->get('electro_list'));
 
-                // dd($balance_list);
+                dd(session()->get('balance_list'));
                 
                 // Установка куки с токеном на 5 минут
                 return redirect()->route('dashboard')->cookie('auth_token', $token, 5);

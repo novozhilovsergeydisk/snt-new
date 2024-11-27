@@ -141,7 +141,28 @@
 
                   <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div id="c2" class="border border-gray-500 p-4">
-
+                    @if(!session('electro_list'))
+                     <p class="text-white/75">Данные не найдены.</p>
+                     @else
+                    <table class="min-w-full table-auto border-collapse bg-white text-sm">
+                            <thead class="bg-gray-200">
+                                <tr class="bg-gray-100">
+                                    <th class="border border-gray-300 px-4 py-2 text-left text-gray-700">Т1 день</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left text-gray-700">Т2 ночь</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left text-gray-700">Сумма (Общий тариф)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (session('electro_list') as $electro)
+                                    <tr class="hover:bg-gray-100">
+                                        <td class="border border-gray-300 px-4 py-2 text-gray-700">{{ $electro->m }}</td>
+                                        <td class="border border-gray-300 px-4 py-2 text-gray-700">{{ $electro->l }}</td>
+                                        <td class="border border-gray-300 px-4 py-2 text-gray-700">{{ $electro->summ }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        @endif
                     </div>
                   </div>
 
@@ -170,17 +191,16 @@
                         <tbody>
                             @foreach (session('balance_list') as $balance)
                             <tr class="odd:bg-white even:bg-gray-50">
-                            <td class="border border-gray-300 px-4 py-2">{{ $balance->id }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ $balance->expense_item }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->accrued, 2, ',', ' ') }} ₽</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->paid, 2, ',', ' ') }} ₽</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->debt, 2, ',', ' ') }} ₽</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->overpayment, 2, ',', ' ') }} ₽</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ $balance->id }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ $balance->expense_item }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->accrued, 2, ',', ' ') }} ₽</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->paid, 2, ',', ' ') }} ₽</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->debt, 2, ',', ' ') }} ₽</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->overpayment, 2, ',', ' ') }} ₽</td>
                             </tr>
                             @endforeach
                         </tbody>
                         </table>
-
                      @endif
                   </div>
             </div>

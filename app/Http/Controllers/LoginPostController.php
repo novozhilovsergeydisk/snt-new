@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Support\Str;
 
+use Illuminate\Support\Facades\Cookie;
+
 class LoginPostController extends Controller
 {
     public function auth(Request $request)
@@ -74,9 +76,15 @@ class LoginPostController extends Controller
                 // dump(session()->get('electro_list'));
 
                 // dd(session()->get('balance_list'));
+
+                // Установить куку
+                Cookie::queue('auth_token', $token, $minutes = 5);
+
+                return view('dashboard');
                 
                 // Установка куки с токеном на 5 минут
-                return redirect()->route('dashboard')->cookie('auth_token', $token, 5);
+            
+                // return redirect()->route('dashboard')->cookie('auth_token', $token, 5);
             } else {
                 return view('login')->with('error', 'Неверный пароль');
             }

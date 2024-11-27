@@ -153,9 +153,35 @@
 
                   <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg"> 
                   <div id="c2" class="border border-gray-500 p-4">                 
-                  @if(session('balance_list'))
-                                 <p class="text-white">Здесь таблица</p>
-                    @endif
+                  @if(!session('balance_list'))
+                     <p class="text-white/75">Данные не найдены.</p>
+                     @else
+                     <table class="min-w-full table-auto border-collapse bg-white text-sm">
+                        <thead class="bg-gray-200">
+                            <tr class="bg-gray-100">
+                            <th class="border border-gray-300 px-4 py-2 text-left">#</th>
+                            <th class="border border-gray-300 px-4 py-2 text-left">Целевое назначение</th>
+                            <th class="border border-gray-300 px-4 py-2 text-left">Начислено</th>
+                            <th class="border border-gray-300 px-4 py-2 text-left">Оплачено</th>
+                            <th class="border border-gray-300 px-4 py-2 text-left">Задолженность</th>
+                            <th class="border border-gray-300 px-4 py-2 text-left">Переплата</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (session('balance_list') as $balance)
+                            <tr class="odd:bg-white even:bg-gray-50">
+                            <td class="border border-gray-300 px-4 py-2">{{ $balance->id }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $balance->expense_item }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->accrued, 2, ',', ' ') }} ₽</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->paid, 2, ',', ' ') }} ₽</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->debt, 2, ',', ' ') }} ₽</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->overpayment, 2, ',', ' ') }} ₽</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                        </table>
+
+                     @endif
                   </div>
             </div>
          </main>

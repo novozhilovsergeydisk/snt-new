@@ -178,7 +178,7 @@
                      <table class="min-w-full table-auto border-collapse bg-white text-sm">
                         <thead class="bg-gray-200">
                             <tr class="bg-gray-100">
-                            <th class="border border-gray-300 px-4 py-2 text-left">#</th>
+
                             <th class="border border-gray-300 px-4 py-2 text-left">Целевое назначение</th>
                             <th class="border border-gray-300 px-4 py-2 text-left">Начислено</th>
                             <th class="border border-gray-300 px-4 py-2 text-left">Оплачено</th>
@@ -189,7 +189,6 @@
                         <tbody>
                             @foreach (session('balance_list') as $balance)
                             <tr class="odd:bg-white even:bg-gray-50">
-                                <td class="border border-gray-300 px-4 py-2">{{ $balance->id }}</td>
                                 <td class="border border-gray-300 px-4 py-2">{{ $balance->expense_item }}</td>
                                 <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->accrued, 2, ',', ' ') }} ₽</td>
                                 <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->paid, 2, ',', ' ') }} ₽</td>

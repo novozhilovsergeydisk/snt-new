@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 // Route::post('/logout', [AuthenticatedSessionController::class, '_destroy'])->name('logout');
 
 Route::post('/logout', 'AuthenticatedSessionController@_destroy')->name('logout');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 // Route::post('/logout', 'AuthenticatedController@_destroy')->name('logout');
 
@@ -51,9 +52,6 @@ Route::get('/logout', function () {
 Route::post('/login', 'LoginPostController@auth');
 
 Route::get('/foo', 'FooController@index');
-
 Route::post('/foo', 'FooPostController@store');
-
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 

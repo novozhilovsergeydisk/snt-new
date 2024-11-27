@@ -19,6 +19,11 @@ class DashboardController extends Controller
         if (!$this->authController->someProtectedMethod($request)) {
             return redirect('/login')->with('error', 'Вы должны войти в систему.'); // Перенаправляем на страницу авторизации
         }
+
+        // $last_name = session()->get('last_name');
+        // $first_name = session()->get('first_name');
+
+        // dump(session());
         
         return view('dashboard'); // Возвращаем представление dashboard
     }

@@ -59,13 +59,20 @@ class LoginPostController extends Controller
                 $middle_name = $user->middle_name;
                 $electro_counter = $user->electro_counter;
 
-                // dd($user);                     ->with('first_name', $first_name)
+                $balance_list = DB::select('SELECT * FROM turnover_balance_sheet WHERE plot = ?', [$plot]);
+
+                session(['last_name' => $last_name]);
+                session(['first_name' => $first_name]);
+                session(['balance_list' => $balance_list]);
+
+                foreach($balance_list as $balance) {
+                    // dump($balance);
+                }
+
+                // dd($balance_list);
                 
                 // Установка куки с токеном на 5 минут
-                return redirect()
-                    ->route('dashboard')
-                    ->with('last_name', $last_name)
-                    ->cookie('auth_token', $token, 5); // Устанавливаем куку на 5 минут
+                return redirect()->route('dashboard')->cookie('auth_token', $token, 5);
             } else {
                 return view('login')->with('error', 'Неверный пароль');
             }

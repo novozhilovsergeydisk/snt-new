@@ -1,0 +1,48 @@
+/* Основной стиль таблицы */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Полосатая раскраска строк */
+.table-striped tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.table-striped tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+/* Границы таблицы */
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.table-bordered th, 
+.table-bordered td {
+    border: 1px solid #dee2e6;
+}
+
+/* Заголовки таблицы */
+.table th {
+    background-color: #f4f4f4;
+    text-align: left;
+    padding: 8px;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Ячейки таблицы */
+.table td {
+    padding: 8px;
+    vertical-align: middle;
+}
+
+/* Стили для hover-эффекта */
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+    transition: background-color 0.2s;
+}

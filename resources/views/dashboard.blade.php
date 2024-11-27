@@ -15,6 +15,7 @@
         <!-- Scripts -->
         <!-- <link rel="modulepreload" href="/build/1O.js" /> -->
         <link rel="stylesheet" href="/css/build/1e.css" />
+        <link rel="stylesheet" href="/css/table.css" />
         <script rel="modulepreload" src="/js/build/10.js"></script>    
     </head>
     <body class="font-sans antialiased">
@@ -32,13 +33,6 @@
 </svg>
                     </a>
                 </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <a class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 dark:border-indigo-600 text-sm font-medium leading-5 text-gray-900 dark:text-gray-100 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out" href="/dashboard">
-    Панель управления
-</a>
-                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -48,7 +42,7 @@
         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                             <div>
                                 @if(session('last_name'))
-{{ session('last_name') }}</p>
+                                    <p>{{ session('last_name') }} {{ session('first_name') }}</p>
                                 @endif
                             </div>
 
@@ -111,20 +105,20 @@
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800 dark:text-gray-200">Сергей Новожилов</div>
-                <div class="font-medium text-sm text-gray-500">sergionov@mail.ru</div>
-            </div>
+            <!-- <div class="px-4">
+                <div class="font-medium text-base text-gray-800 dark:text-gray-200">proxima</div>
+                <div class="font-medium text-sm text-gray-500">oximas</div>
+            </div> -->
 
             <div class="mt-3 space-y-1">
-                <a class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 focus:outline-none focus:text-gray-800 dark:focus:text-gray-200 focus:bg-gray-50 dark:focus:bg-gray-700 focus:border-gray-300 dark:focus:border-gray-600 transition duration-150 ease-in-out" href="http://127.0.0.1:8001/profile">
+                <a class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 focus:outline-none focus:text-gray-800 dark:focus:text-gray-200 focus:bg-gray-50 dark:focus:bg-gray-700 focus:border-gray-300 dark:focus:border-gray-600 transition duration-150 ease-in-out" href="/profile">
     Профиль
 </a>
 
                 <!-- Authentication -->
-                <form method="POST" action="http://127.0.0.1:8001/logout">
+                <form method="POST" action="/logout">
                     <input type="hidden" name="_token" value="tRIbDK8PA45LJIKpEdAxcFA7YIYPBHPtxpB7g6YG" autocomplete="off">
-                    <a class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 focus:outline-none focus:text-gray-800 dark:focus:text-gray-200 focus:bg-gray-50 dark:focus:bg-gray-700 focus:border-gray-300 dark:focus:border-gray-600 transition duration-150 ease-in-out" href="http://127.0.0.1:8001/logout" onclick="event.preventDefault();
+                    <a class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 focus:outline-none focus:text-gray-800 dark:focus:text-gray-200 focus:bg-gray-50 dark:focus:bg-gray-700 focus:border-gray-300 dark:focus:border-gray-600 transition duration-150 ease-in-out" href="/logout" onclick="event.preventDefault();
                                         this.closest('form').submit();">
     Выход
 </a>
@@ -151,6 +145,37 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     Вы вошли в систему!
                 </div>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                @if(!session('balance_list'))
+                    <p>Данные не найдены.</p>
+                @else
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Статья расхода</th>
+                                <th>Начислено</th>
+                                <th>Оплачено</th>
+                                <th>Долг</th>
+                                <th>Переплата</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (session('balance_list') as $balance)
+                                <tr>
+                                    <td>{{ $balance->id }}</td>
+                                    <td>{{ $balance->expense_item }}</td>
+                                    <td>{{ number_format($balance->accrued, 2, ',', ' ') }} ₽</td>
+                                    <td>{{ number_format($balance->paid, 2, ',', ' ') }} ₽</td>
+                                    <td>{{ number_format($balance->debt, 2, ',', ' ') }} ₽</td>
+                                    <td>{{ number_format($balance->overpayment, 2, ',', ' ') }} ₽</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @endif
             </div>
         </div>
     </div>

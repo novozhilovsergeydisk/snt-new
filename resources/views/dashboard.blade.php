@@ -153,7 +153,9 @@
 
                   <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg"> 
                   <div id="c2" class="border border-gray-500 p-4">                 
-
+                  @if(session('balance_list'))
+                                 <p class="text-white">Здесь таблица</p>
+                    @endif
                   </div>
             </div>
          </main>

@@ -56,6 +56,11 @@ class LoginPostController extends Controller
                 session(['token' => $token]);
 
                 $user = DB::select('SELECT * FROM clients WHERE plot = ?', [$plot])[0];
+
+                if (empty($user)) {
+                    return view('login')->with('error', 'Пользователь с таким ID не найден');
+                }
+
                 $user_id = $user->user_id;
                 $last_name = $user->last_name;
                 $first_name = $user->first_name;
@@ -64,19 +69,30 @@ class LoginPostController extends Controller
 
                 $balance_list = DB::select('SELECT * FROM turnover_balance_sheet WHERE plot = ?', [$plot]);
 
-                $electro_list = DB::select('SELECT * FROM electro_counter_list WHERE user_id = ?', [$user_id])[0];
-                $m = $electro_list->M;
-                $l = $electro_list->L;
-                $summ = $electro_list->summ;
+                $emty_balance_list = empty($balance_list);
+                $balance_list = $emty_balance_list ? null : $emty_balance_list;
+
+                $electro_list = DB::select('SELECT * FROM electro_counter_list WHERE user_id = ?', [$user_id]);
+
+
+                $empty_electro_list = empty($electro_list);
+
+                // dump($electro_list);
+
+                // dd($empty_electro_list);
+
+                $m = $empty_electro_list ? null : $electro_list[0]->m;
+                $l = $empty_electro_list ? null : $electro_list[0]->l;
+                $summ = $empty_electro_list ? null : $electro_list[0]->summ;
 
                 // dump($balance_list);
 
-                // dd($summ);
+                // dd($electro_list);
 
                 session(['last_name' => $last_name]);
                 session(['first_name' => $first_name]);
                 session(['balance_list' => $balance_list]);
-                session(['electro_list' => $electro_list]);
+                // session(['electro_list' => $electro_list]);
                 session(['m' => $m]);
                 session(['l' => $l]);
                 session(['summ' => $summ]);

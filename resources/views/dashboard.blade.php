@@ -8,6 +8,9 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
+    <!-- Подключение Font Awesome через CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
     <!-- Scripts -->
     <!-- <link rel="modulepreload" href="/build/1O.js" /> -->
     <link rel="stylesheet" href="/css/build/1e.css"/>
@@ -68,10 +71,25 @@
                                 <a class="block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-800 transition duration-150 ease-in-out"
                                    href="/profile">Профиль</a>
                                 <!-- Authentication -->
-                                <form method="POST" action="/logout">
+                                <form method="POST" action="/logout" class="flex items-center">
                                     {{ csrf_field() }}
-                                    <button type="submit" class="ml-5 text-white sm-text">Выйти</button>
+                                    <button type="submit" class="ml-5 text-white sm-text">Выйти</button> 
+                                    <i class="fas fa-sign-out-alt text-white text-sm ml-2"></i>
                                 </form>
+
+                                <!-- <form method="POST" action="/logout">
+                                    {{ csrf_field() }}
+                                    <button type="submit" class="ml-5 text-white sm-text">Выйти</button> <i class="fas fa-sign-out-alt"></i>
+                                </form> -->
+                                <!-- <form method="POST" action="/logout" class="flex items-center">
+                                    {{ csrf_field() }}
+                                    <button type="submit" class="ml-5 text-white sm-text flex items-center">
+                                        Выйти 
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-10v1" />
+                                        </svg>
+                                    </button>
+                                </form> -->
                             <!-- <form method="POST" action="/logout">
                                  <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete="off">
                                  <a class="block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-800 transition duration-150 ease-in-out" href="/logout" onclick="event.preventDefault();
@@ -122,7 +140,7 @@
                         <a class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 focus:outline-none focus:text-gray-800 dark:focus:text-gray-200 focus:bg-gray-50 dark:focus:bg-gray-700 focus:border-gray-300 dark:focus:border-gray-600 transition duration-150 ease-in-out"
                            href="/logout" onclick="event.preventDefault();
                            this.closest('form').submit();">
-                            Выход@
+                            Выход <i class="fas fa-sign-out-alt"></i>
                         </a>
                     </form>
                 </div>

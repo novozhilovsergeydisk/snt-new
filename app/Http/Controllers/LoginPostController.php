@@ -71,6 +71,10 @@ class LoginPostController extends Controller
 
                 $electro_list = DB::select('SELECT * FROM electro_counter_list WHERE user_id = ?', [$user_id]);
 
+                dump($balance_list);
+
+                dd($electro_list);
+
                 if ($electro_list === []) {
                     $m = '';
                     $l = '';

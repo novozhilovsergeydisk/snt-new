@@ -51,7 +51,7 @@ class LoginPostController extends Controller
             if ($check) {
                 // Генерация токена
                 $token = Str::random(60);
-                
+
                 // Сохранение токена в сессии
                 session(['token' => $token]);
 
@@ -85,14 +85,6 @@ class LoginPostController extends Controller
                     $summ = $electro_list[0]->summ;
                 }
 
-                // dd($electro_list);
-
-                // dump($l);
-
-                // dump($balance_list);
-
-                // dd($electro_list);
-
                 session(['last_name' => $last_name]);
                 session(['first_name' => $first_name]);
                 session(['balance_list' => $balance_list]);
@@ -101,17 +93,13 @@ class LoginPostController extends Controller
                 session(['l' => $l]);
                 session(['summ' => $summ]);
 
-                // dump(session()->get('electro_list'));
-
-                // dd(session()->get('balance_list'));
-
                 // Установить куку
                 Cookie::queue('auth_token', $token, $minutes = 5);
 
                 return view('dashboard');
-                
+
                 // Установка куки с токеном на 5 минут
-            
+
                 // return redirect()->route('dashboard')->cookie('auth_token', $token, 5);
             } else {
                 return view('login')->with('error', 'Неверный пароль');

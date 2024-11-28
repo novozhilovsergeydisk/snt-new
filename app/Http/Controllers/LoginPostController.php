@@ -69,21 +69,21 @@ class LoginPostController extends Controller
 
                 $balance_list = DB::select('SELECT * FROM turnover_balance_sheet WHERE plot = ?', [$plot]);
 
-                $emty_balance_list = empty($balance_list);
-                $balance_list = $emty_balance_list ? null : $emty_balance_list;
-
                 $electro_list = DB::select('SELECT * FROM electro_counter_list WHERE user_id = ?', [$user_id]);
 
+                if ($electro_list === []) {
+                    $m = '';
+                    $l = '';
+                    $summ = '';
+                } else {
+                    $m = $electro_list[0]->m;
+                    $l = $electro_list[0]->l;
+                    $summ = $electro_list[0]->summ;
+                }
 
-                $empty_electro_list = empty($electro_list);
+                // dd($electro_list);
 
-                // dump($electro_list);
-
-                // dd($empty_electro_list);
-
-                $m = $empty_electro_list ? null : $electro_list[0]->m;
-                $l = $empty_electro_list ? null : $electro_list[0]->l;
-                $summ = $empty_electro_list ? null : $electro_list[0]->summ;
+                // dump($l);
 
                 // dump($balance_list);
 
@@ -92,7 +92,7 @@ class LoginPostController extends Controller
                 session(['last_name' => $last_name]);
                 session(['first_name' => $first_name]);
                 session(['balance_list' => $balance_list]);
-                // session(['electro_list' => $electro_list]);
+                session(['electro_list' => $electro_list]);
                 session(['m' => $m]);
                 session(['l' => $l]);
                 session(['summ' => $summ]);

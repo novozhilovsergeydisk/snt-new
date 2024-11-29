@@ -208,87 +208,6 @@
                     </div>
                 </div>
 
-                <!--<div id="balance-list" class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div id="c2" class="border border-gray-500 p-4">-->
-                        <!-- Мобильная таблица -->
-                        <!--<table id="table-mobile"
-                               class="w-full table-auto bg-white text-sm border border-gray-300 hidden">
-                            <thead class="bg-gray-200">
-                            <tr class="bg-gray-100">
-                                <th class="border border-gray-300 px-4 py-2 text-left">Параметр</th>
-                                <th class="border border-gray-300 px-4 py-2 text-left">Значение</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach (session('balance_list') as $balance)
-                                <tr class="odd:bg-white even:bg-gray-50">
-                                    <td class="border border-gray-300 px-4 py-2">Целевое назначение</td>
-                                    <td class="border border-gray-300 px-4 py-2">{{ $balance->expense_item }}</td>
-                                </tr>
-                                <tr class="odd:bg-white even:bg-gray-50">
-                                    <td class="border border-gray-300 px-4 py-2">Начислено</td>
-                                    <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->accrued, 2, ',', ' ') }}
-                                        ₽
-                                    </td>
-                                </tr>
-                                <tr class="odd:bg-white even:bg-gray-50">
-                                    <td class="border border-gray-300 px-4 py-2">Оплачено</td>
-                                    <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->paid, 2, ',', ' ') }}
-                                        ₽
-                                    </td>
-                                </tr>
-                                <tr class="odd:bg-white even:bg-gray-50">
-                                    <td class="border border-gray-300 px-4 py-2">Задолженность</td>
-                                    <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->debt, 2, ',', ' ') }}
-                                        ₽
-                                    </td>
-                                </tr>
-                                <tr class="odd:bg-white even:bg-gray-50">
-                                    <td class="border border-gray-300 px-4 py-2">Переплата</td>
-                                    <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->overpayment, 2, ',', ' ') }}
-                                        ₽
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                        -->
-
-                        <!-- Десктопная таблица -->
-                        <!--<table id="table-desktop" class="min-w-full table-auto border-collapse bg-white text-sm">
-                            <thead class="bg-gray-200">
-                            <tr class="bg-gray-100">
-                                <th class="border border-gray-300 px-4 py-2 text-left">Целевое назначение</th>
-                                <th class="border border-gray-300 px-4 py-2 text-left">Начислено</th>
-                                <th class="border border-gray-300 px-4 py-2 text-left">Оплачено</th>
-                                <th class="border border-gray-300 px-4 py-2 text-left">Задолженность</th>
-                                <th class="border border-gray-300 px-4 py-2 text-left">Переплата</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach (session('balance_list') as $balance)
-                                <tr class="odd:bg-white even:bg-gray-50">
-                                    <td class="border border-gray-300 px-4 py-2">{{ $balance->expense_item }}</td>
-                                    <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->accrued, 2, ',', ' ') }}
-                                        ₽
-                                    </td>
-                                    <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->paid, 2, ',', ' ') }}
-                                        ₽
-                                    </td>
-                                    <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->debt, 2, ',', ' ') }}
-                                        ₽
-                                    </td>
-                                    <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->overpayment, 2, ',', ' ') }}
-                                        ₽
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                        -->
-                    <!--</div>
-                </div>-->
-
                 <div id="balance-list" class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div id="c2" class="border border-gray-500 p-4">
                         @if(!session('balance_list'))
@@ -309,7 +228,46 @@
                                     $totalOverpayment += $balance->overpayment;
                                 }
                             @endphp
-                            <table id="table-mobile" class="hidden">
+                            <table id="table-mobile"
+                                   class="w-full table-auto bg-white text-sm border border-gray-300 hidden">
+                                <thead class="bg-gray-200">
+                                <tr class="bg-gray-100">
+                                    <th class="border border-gray-300 px-4 py-2 text-left">Параметр</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">Значение</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach (session('balance_list') as $balance)
+                                    <tr class="odd:bg-white even:bg-gray-50">
+                                        <td class="border border-gray-300 px-4 py-2">Целевое назначение</td>
+                                        <td class="border border-gray-300 px-4 py-2">{{ $balance->expense_item }}</td>
+                                    </tr>
+                                    <tr class="odd:bg-white even:bg-gray-50">
+                                        <td class="border border-gray-300 px-4 py-2">Начислено</td>
+                                        <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->accrued, 2, ',', ' ') }}
+                                            ₽
+                                        </td>
+                                    </tr>
+                                    <tr class="odd:bg-white even:bg-gray-50">
+                                        <td class="border border-gray-300 px-4 py-2">Оплачено</td>
+                                        <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->paid, 2, ',', ' ') }}
+                                            ₽
+                                        </td>
+                                    </tr>
+                                    <tr class="odd:bg-white even:bg-gray-50">
+                                        <td class="border border-gray-300 px-4 py-2">Задолженность</td>
+                                        <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->debt, 2, ',', ' ') }}
+                                            ₽
+                                        </td>
+                                    </tr>
+                                    <tr class="odd:bg-white even:bg-gray-50">
+                                        <td class="border border-gray-300 px-4 py-2">Переплата</td>
+                                        <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->overpayment, 2, ',', ' ') }}
+                                            ₽
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
                             </table>
 
                             <table id="table-desktop" class="min-w-full table-auto border-collapse bg-white text-sm">
@@ -361,7 +319,6 @@
                     </div>
                 </div>
             </div>
-
 
 
         </div>

@@ -1,0 +1,27 @@
+/* Скрыть меню по умолчанию */
+.mobile-menu.hidden {
+    display: none;
+}
+
+.mobile-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px; /* Отступ от верхнего края */
+    right: 0;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    padding: 10px;
+    z-index: 1000;
+}
+
+.mobile-menu li {
+    margin: 10px 0;
+}
+
+#menu-toggler {
+    background: none;
+    border: none;
+    cursor: pointer;
+}

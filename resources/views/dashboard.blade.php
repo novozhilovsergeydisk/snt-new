@@ -208,10 +208,10 @@
                     </div>
                 </div>
 
-                <div id="balance-list" class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div id="c2" class="border border-gray-500 p-4">
+                <!--<div id="balance-list" class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div id="c2" class="border border-gray-500 p-4">-->
                         <!-- Мобильная таблица -->
-                        <table id="table-mobile"
+                        <!--<table id="table-mobile"
                                class="w-full table-auto bg-white text-sm border border-gray-300 hidden">
                             <thead class="bg-gray-200">
                             <tr class="bg-gray-100">
@@ -252,9 +252,10 @@
                             @endforeach
                             </tbody>
                         </table>
+                        -->
 
                         <!-- Десктопная таблица -->
-                        <table id="table-desktop" class="min-w-full table-auto border-collapse bg-white text-sm">
+                        <!--<table id="table-desktop" class="min-w-full table-auto border-collapse bg-white text-sm">
                             <thead class="bg-gray-200">
                             <tr class="bg-gray-100">
                                 <th class="border border-gray-300 px-4 py-2 text-left">Целевое назначение</th>
@@ -284,88 +285,88 @@
                             @endforeach
                             </tbody>
                         </table>
-                    </div>
-                </div>
+                        -->
+                    <!--</div>
+                </div>-->
 
-
-            <!-- <div id="balance-list" class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div id="balance-list" class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div id="c2" class="border border-gray-500 p-4">
                         @if(!session('balance_list'))
-                <p class="text-white/75">Данные не найдены.</p>
-@else
-                @php
-                    // Инициализация переменных для хранения итогов
-                    $totalAccrued = 0;
-                    $totalPaid = 0;
-                    $totalDebt = 0;
-                    $totalOverpayment = 0;
+                            <p class="text-white/75">Данные не найдены.</p>
+                        @else
+                            @php
+                                // Инициализация переменных для хранения итогов
+                                $totalAccrued = 0;
+                                $totalPaid = 0;
+                                $totalDebt = 0;
+                                $totalOverpayment = 0;
 
-                    // Подсчет итогов по каждому столбцу
-                    foreach (session('balance_list') as $balance) {
-                        $totalAccrued += $balance->accrued;
-                        $totalPaid += $balance->paid;
-                        $totalDebt += $balance->debt;
-                        $totalOverpayment += $balance->overpayment;
-                    }
-                @endphp
-                        <table id="table-mobile" class="hidden">
-                        </table>
+                                // Подсчет итогов по каждому столбцу
+                                foreach (session('balance_list') as $balance) {
+                                    $totalAccrued += $balance->accrued;
+                                    $totalPaid += $balance->paid;
+                                    $totalDebt += $balance->debt;
+                                    $totalOverpayment += $balance->overpayment;
+                                }
+                            @endphp
+                            <table id="table-mobile" class="hidden">
+                            </table>
 
-                        <table id="table-desktop" class="min-w-full table-auto border-collapse bg-white text-sm">
-                            <thead class="bg-gray-200">
-                            <tr class="bg-gray-100">
-                                <th class="border border-gray-300 px-4 py-2 text-left">Целевое назначение</th>
-                                <th class="border border-gray-300 px-4 py-2 text-left">Начислено</th>
-                                <th class="border border-gray-300 px-4 py-2 text-left">Оплачено</th>
-                                <th class="border border-gray-300 px-4 py-2 text-left">Задолженность</th>
-                                <th class="border border-gray-300 px-4 py-2 text-left">Переплата</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-@foreach (session('balance_list') as $balance)
-                    <tr class="odd:bg-white even:bg-gray-50">
-                        <td class="border border-gray-300 px-4 py-2">{{ $balance->expense_item }}</td>
+                            <table id="table-desktop" class="min-w-full table-auto border-collapse bg-white text-sm">
+                                <thead class="bg-gray-200">
+                                <tr class="bg-gray-100">
+                                    <th class="border border-gray-300 px-4 py-2 text-left">Целевое назначение</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">Начислено</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">Оплачено</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">Задолженность</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">Переплата</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach (session('balance_list') as $balance)
+                                    <tr class="odd:bg-white even:bg-gray-50">
+                                        <td class="border border-gray-300 px-4 py-2">{{ $balance->expense_item }}</td>
                                         <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->accrued, 2, ',', ' ') }}
-                            ₽
-                        </td>
-                        <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->paid, 2, ',', ' ') }}
-                            ₽
-                        </td>
-                        <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->debt, 2, ',', ' ') }}
-                            ₽
-                        </td>
-                        <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->overpayment, 2, ',', ' ') }}
-                            ₽
-                        </td>
-                    </tr>
-@endforeach
-                        <tr class="odd:bg-white even:bg-gray-50">
-                            <td class="text-green-700 font-bold pl-4">Итого</td>
-                            <td class="border border-gray-300 px-4 py-2 text-green-700 font-bold">{{ number_format($totalAccrued, 2, ',', ' ') }}
-                        ₽
-                    </td>
-                    <td class="border border-gray-300 px-4 py-2 text-green-700 font-bold">{{ number_format($totalPaid, 2, ',', ' ') }}
-                        ₽
-                    </td>
-                    <td class="border border-gray-300 px-4 py-2 text-green-700 font-bold">{{ number_format($totalDebt, 2, ',', ' ') }}
-                        ₽
-                    </td>
-                    <td class="border border-gray-300 px-4 py-2 text-green-700 font-bold">{{ number_format($totalOverpayment, 2, ',', ' ') }}
-                        ₽
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-@endif
+                                            ₽
+                                        </td>
+                                        <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->paid, 2, ',', ' ') }}
+                                            ₽
+                                        </td>
+                                        <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->debt, 2, ',', ' ') }}
+                                            ₽
+                                        </td>
+                                        <td class="border border-gray-300 px-4 py-2">{{ number_format($balance->overpayment, 2, ',', ' ') }}
+                                            ₽
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                <tr class="odd:bg-white even:bg-gray-50">
+                                    <td class="text-green-700 font-bold pl-4">Итого</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-green-700 font-bold">{{ number_format($totalAccrued, 2, ',', ' ') }}
+                                        ₽
+                                    </td>
+                                    <td class="border border-gray-300 px-4 py-2 text-green-700 font-bold">{{ number_format($totalPaid, 2, ',', ' ') }}
+                                        ₽
+                                    </td>
+                                    <td class="border border-gray-300 px-4 py-2 text-green-700 font-bold">{{ number_format($totalDebt, 2, ',', ' ') }}
+                                        ₽
+                                    </td>
+                                    <td class="border border-gray-300 px-4 py-2 text-green-700 font-bold">{{ number_format($totalOverpayment, 2, ',', ' ') }}
+                                        ₽
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        @endif
                     </div>
-                </div> -->
-
+                </div>
             </div>
+
+
+
         </div>
+
     </main>
 </div>
 </body>
 </html>
-<!-- <div class="mt-4">
-   <a href="/logout" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">Выход</a>
-   </div> -->

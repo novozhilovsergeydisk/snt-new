@@ -207,7 +207,7 @@
                         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Целевые
                             расходы</h2>
 			<h5 class="font-semibold_ text-1rem text-gray-800 dark:text-gray-200 leading-tight">
-				Статистика по состоянию на 25.12.2024 г.
+				Статистика по состоянию на 03.01.2025 г.
 			</h5>
                     </div>
                 </div>

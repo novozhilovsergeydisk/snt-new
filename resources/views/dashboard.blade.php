@@ -163,9 +163,33 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <!-- <div class="p-6 text-gray-900 dark:text-gray-100">
-                       Вы вошли в систему!
-                    </div> -->
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
+<div class="max-w-4xl mx-auto p-6 bg-gray-800 text-white shadow-lg rounded-lg text-center">
+  <h2 class="text-3xl font-bold mb-4">Объявление</h2>
+  <div class="mb-4">
+    <p class="font-semibold">21 июня 2025 г. в 17:00</p>
+  </div>
+  <h3 class="text-2xl font-semibold mb-2">Возле правления СНТ состоится:</h3>
+  <h4 class="text-lg font-medium mb-4">Очередное общее собрание</h4>
+  <p class="font-bold mb-4">Повестка дня:</p>
+<div class="flex justify-center items-center min-h-screen_">
+  <div class_="w-full max-w-4xl p-6 bg-gray-800 text-white shadow-lg rounded-lg text-center">
+    <ol class="list-decimal pl-6 leading-loose text-left">
+      <li>Прием в члены СНТ нового собственника участка №18.</li>
+      <li>Выборы председателя правления СНТ.<br />
+        Кандидат: Родченков Н.С.</li>
+      <li>Выборы состава правления СНТ.<br />
+        Кандидаты: Сусоев А.М., Шутов Н.Ф., Шпнева Е.И.</li>
+      <li>Утверждение отчета ревизионной комиссии за период с 01.07.2024–30.06.2025 гг.</li>
+      <li>Выборы состава ревизионной комиссии.<br />
+        Кандидаты: Калинина С.Л. (председатель), Лопатина И.А., Акишина Т.В.</li>
+      <li>Утверждение расходной сметы на 2025–2026 гг.</li>
+    </ol>
+  </div>
+</div>
+  <p class="mt-4">Регистрация участников начинается в 16:30.<br />При невозможности присутствия на собрании, заполните бланк доверенности простой письменной формы.</p>
+</div>
+                    </div> 
                 </div>
 
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -207,7 +231,7 @@
                         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Целевые
                             расходы</h2>
 			<h5 class="font-semibold_ text-1rem text-gray-800 dark:text-gray-200 leading-tight">
-				Статистика по состоянию на 03.01.2025 г.
+				Статистика по состоянию на 03.06.2025 г.
 			</h5>
                     </div>
                 </div>

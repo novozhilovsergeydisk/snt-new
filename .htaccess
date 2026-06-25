@@ -1,3 +1,13 @@
+# 1. Жесткая блокировка доступа к конфиденциальным файлам
+<FilesMatch "^\.env|sql\.zip$|composer\.(json|lock)|package\.json|artisan">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# 2. Запрет на просмотр структуры директорий (если индексного файла нет)
+Options -Indexes
+
+# 3. Ваше существующее правило перенаправления в public
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
